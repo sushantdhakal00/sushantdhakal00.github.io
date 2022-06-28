@@ -1,0 +1,105 @@
+body {
+    background-color: darkslategray;
+    overflow: hidden;
+    background-image: url('img/back3.jpg');
+    background-size:cover;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+#start {
+    position: absolute;
+    z-index: 2;
+    top: 100px;
+    left: 100px;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    background-color: red;
+    border-style: none;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    visibility: hidden;
+    opacity: 0.9;
+}
+
+#start:hover {
+    opacity: 0.8;
+}
+
+#title {
+    position: absolute;
+    z-index: 2;
+    top: 100px;
+    left: 100px;
+    width: 1000px;
+    visibility: hidden;
+    text-align: center;
+    font-size: 100px;
+    font-family: monospace;
+    color: #373737;
+}
+
+#deathBox {
+    width: 400px;
+    height: 250px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    opacity: 0.9;
+    background-color: #dfa0a0;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-family: cursive;
+    font-size: 40px;
+}
+
+#score {
+    font-size: 20px;
+}
+
+#highScore {
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+}
+
+.btnDeath {
+    padding: 10px;
+    border-style: none;
+    background-color: rgb(240, 237, 90);
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.btnDeath img {
+    height: 20px;
+    width: 20px;
+}
+
+.btnDeath:hover {
+    opacity: 0.7;
+}
+
+#perfect {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    padding: 10px;
+    font-family: cursive;
+}

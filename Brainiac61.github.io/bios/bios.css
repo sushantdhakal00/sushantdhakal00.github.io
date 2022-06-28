@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    font-family: "Inconsolata", monospace;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+nav {
+    background-color: #a8a8a8;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.15rem 2rem;
+    display: flex;
+}
+nav ul li + li {
+    margin-left: 1rem;
+}
+nav ul li:last-child {
+    margin-left: auto;
+}
+main {
+    background-color: #0b00a8;
+    color: #a8a8a8;
+    padding: 1.25rem 1rem;
+    box-shadow: inset 0 0 0 7px #0b00a8, inset 0 0 0 9px currentcolor;
+    position: relative;
+}
+main:focus {
+    outline: none;
+}
+main:before {
+    content: "HELLOWORLD.BAT";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #a8a8a8;
+    color: #0b00a8;
+    padding: 0 0.75rem;
+}
+main span {
+    display: inline-flex;
+}
+footer {
+    background-color: #00a7a8;
+    color: #fff;
+    padding: 0.05rem 1rem;
+    display: flex;
+}
+footer span {
+    margin-left: 2rem;
+}
+.cursor:after {
+    content: "";
+    display: inline-block;
+    width: 1ch;
+    height: 1.1em;
+    background-color: #0b00a8;
+    margin: -0.03em 0 -0.03em -0.03em;
+}
+.cursor.active:after {
+    animation: cursor 400ms ease-in-out infinite;
+}
+@keyframes cursor {
+    0%, 100% {
+        background-color: #0b00a8;
+   }
+    50% {
+        background-color: #a8a8a8;
+   }
+}

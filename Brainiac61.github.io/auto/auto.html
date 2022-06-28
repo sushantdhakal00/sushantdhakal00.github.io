@@ -1,0 +1,35 @@
+<DOCTYPE html>
+    <link rel="stylesheet" href="auto.css" />
+  <html>
+    <head>
+        <title>Linux Terminal</title>
+    </head>
+<body>
+    
+    <meta http-equiv="refresh" content="10;url=https://brainiac61.github.io/" />
+
+    <header id="header"></header><br>
+    <div class="main" style='display:none'>
+    <div class="cmd">
+    <div id="append"></div>
+    <span class="$" style='color:rgb(122, 49, 49);font-weight:bold;font-size:14px;font-family:Lucida Console;'></span>
+    </div>
+    </div>
+    <script>
+        window.onload = () => {   
+    const terminal = {
+        txt:".............................................................Hello ! (^-^)ゝ           ",
+        shell:"Sudo Destruction:-$",
+    }   
+    let pos = -2;
+    let header = document.getElementById("header");
+    function type(){
+        header.innerHTML += terminal.txt.charAt(pos);
+        pos++;
+    }
+    setInterval(type, 100);
+    setTimeout(show_cline, 4500); // 4.5sec after body onload
+}
+    </script>
+</body>
+</html>
