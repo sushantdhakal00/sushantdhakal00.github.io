@@ -1,0 +1,12 @@
+body{
+    background-color: black; /*#702963;*/
+    overflow:hidden;
+    font-size:17px;
+    font-family: "Lucida Console";
+    overflow:scroll;
+}
+/* header */
+header{
+    color:#5eff00;
+    font-weight:bolder;
+}

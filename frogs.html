@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Click anywhere </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" type="image/png" href="https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500">
+  <style type="text/css">
+
+  body, html{
+    width: 100%;
+    height: 100%;
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    background:#0D343A;
+    background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(#000000)  );
+    background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(0,0,0,1) 100%);
+    overflow:hidden;
+    background: rgba(245,252,47,1);
+    background: -moz-linear-gradient(top, #232934 15%, #232934 41%, #232934 61%, #232934 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(15%, #232934), color-stop(41%, rgb(203, 204, 181)), color-stop(61%, rgb(190, 196, 176)), color-stop(100%, rgb(195, 208, 195)));
+    background: -webkit-linear-gradient(top, #232934 15%, #232934 41%, #232934 61%, #232934 100%);
+    background: -o-linear-gradient(top, rgb(207, 207, 198) 15%, rgb(229, 229, 222) 41%, rgb(246, 248, 243) 61%, rgb(223, 232, 223) 100%);
+    background: -ms-linear-gradient(top, rgba(245,252,47,1) );
+    background: linear-gradient(to bottom, rgb(233, 233, 227) );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fc2f', endColorstr='#32cd32', GradientType=0 );
+    cursor:url(https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500), auto;
+  }
+
+  @keyframes spin {
+    from {transform: rotateZ(0deg);}
+    to {transform: rotateZ(360deg);}
+  }
+
+  canvas{
+    float: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  img#zig{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: none;
+    animation: spin;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    border-radius: 40%;
+  }
+  img#zig.show{
+    display: block;
+  }
+
+/*  div.rain{
+    background-image:url(https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500);
+    width: 100px;
+    height: 100px;
+  }*/
+
+  section.rain{
+    width: 100%;
+    height: 100%;
+    float: left;
+    display: block;
+    position: relative;
+  }
+
+  .drop {
+  background:url(https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500);
+  background-size: cover;
+  width:50px;
+  height:50px;
+  position: absolute;
+  bottom:200px;
+/*  -webkit-animation: fall .93s linear infinite;
+  -moz-animation: fall .93s linear infinite;*/
+  z-index: 3;
+}
+
+  @-webkit-keyframes fall {
+    to {margin-top:1200px;}
+  }
+  @-moz-keyframes fall {
+    to {margin-top:1200px;}
+  }
+
+
+
+  </style>
+</head>
+
+<body>
+  <img id="lemon" src="https://freepngimg.com/save/98405-the-pepe-frog-sad-download-hd/499x500" style="display: none;"/>
+	<img id="zig" src="zig.jpg"/>
+  <section class="rain"></section>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  $(window).on('load', function(){
+    $('body').addClass('loaded');
+  })
+
+
+
+  // number of drops created.
+var nbDrop = 200; 
+
+// function to generate a random number range.
+function randRange( minNum, maxNum) {
+  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+}
+
+function timingRange( minNum, maxNum) {
+  return (Math.random() * (maxNum - minNum + 1)) + minNum;
+}
+
+// function to generate drops
+function createRain() {
+
+  for( i=1;i<nbDrop;i++) {
+  var dropLeft = randRange(0,1600);
+  var dropTop = randRange(-1000,1400);
+  var timing = timingRange(2,3);
+  var customSize = timing * 25;
+  var customZ = Math.floor(customSize);
+
+  $('.rain').append('<div style="z-index: '+customZ+'; width: '+customSize+'px; height: '+customSize+'px; -webkit-animation: fall '+timing+'s linear infinite; -moz-animation: fall '+timing+'s linear infinite;" class="drop" id="drop'+i+'"></div>');
+  $('#drop'+i).css('left',dropLeft);
+  $('#drop'+i).css('top',dropTop);
+  }
+
+}
+var clickCount = 0;
+$('body').click(function(){
+  clickCount ++;
+  var msg = new SpeechSynthesisUtterance('Why so sad, normies? Lets put a smile on that face.');
+  speechSynthesis.cancel();
+  window.speechSynthesis.speak(msg);
+  if (clickCount >= 20){
+    $('#zig').show();
+    clickCount = 0;
+    setTimeout(function(){
+      $('#zig').hide();
+    }, 3000);
+  }
+
+})
+// Make it rain
+createRain();
+
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-106123322-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
+
