@@ -707,7 +707,7 @@ a:focus, a:active, button:focus, button:active {
     padding: 6px 15px 6px 8px;
     position: absolute;
     right: -6px;
-    top: -37px;
+    top: -60px;
     height: 46px;
     color: #3e3e3e;
     font-weight: 600;
@@ -1000,7 +1000,7 @@ address a:hover {
     position: absolute;
     text-align: center;
     width: 100%;
-    top: 40%;
+    top: 20%;
 }
 
 .main_content a {
@@ -1364,9 +1364,9 @@ address a:hover {
     cursor: pointer;
 }
 
-/*.op_menu{
+.op_menu{
   padding-top: 10px;
-}*/
+}
 .nectar-box-roll .overlaid-content h1 {
     margin-top: 6% !important;
     line-height: 45px !important;
@@ -1776,7 +1776,7 @@ footer .ft_menu ul li a:hover {
     #container canvas {
         width: 300px;
         left: 232px;
-        top: 59px;
+        top: 20px;
     }
 
     .change_head {
