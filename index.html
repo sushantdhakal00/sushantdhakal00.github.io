@@ -53,7 +53,7 @@
 
     <div class="os-phrases" id="os-phrases">
 
-        <h2>Loading....Wait a sec.</h2>
+        <h2>Loading....Wait a second.</h2>
 
         
 
@@ -105,23 +105,42 @@
                             <div class="col-md-5 col-sm-6">
 
                                 <ul class="main_menu">
-
-                                    <li class="ani3 delay"><a
+                                    <h4>
+                                    <li class="ani1 delay"><a
                                                 href="index.html">Home</a>
                                         <span>- Homepage</span></li>
-                                     <li class="ani4 delay"><a
+                                     <li class="ani2 delay"><a
                                             href="contact.html">Contact me</a>
-                                    <span>- Wanna talk?</span></li>
+                                    <span>- Want to reach out to me ?</span></li>
                                     
 
                                     
-                                     <li class="ani4 delay"><a
-                                             href="Brainiac61.github.io/index.html">Explore more</a>
-                                    <span></span></li>
-
+                                     <li class="ani3 delay"><a
+                                             href="https://qr.dhakalsushant.com.np">QR CODE GENERATOR</a>
+                                    <span>Latest v40 available.</span></li>
+                                    <li class="ani3 delay"><a
+                                        href="https://paint.dhakalsushant.com.np">Clone of old paint of windows</a>
+                               <span></span></li>
+                               <li class="ani3 delay"><a
+                                href="https://win.dhakalsushant.com.np/index.html">Windows in the browser</a>
+                                
+                       <span>Windows XP.</span></li>
+                       <li class="ani3 delay"><a
+                        href="https://google.dhakalsushant.com.np/index.html">Web tool for Advanced google search. </a>
+                        
+               <span>For very accurate Google searches.</span></li>
+            </h4>
 					
                  
 					
+            <div class="rights">
+
+                <p>
+            
+                    © Sushant Dhakal, 2017-23 All Rights Reserved.
+                </p>
+            
+            </div>
 					<nav class="overlay-menu container">
                             
                                      
@@ -137,26 +156,7 @@
                             </div>
 
 
-                            <div class="col-md-6 col-sm-6 nav-address">
-
-                                <div class="abt_me"><!-- start abt_me -->
-
-                                    <div class="abt_bullmonk ani13 delay">
-                                        <h4 class="text-yellow">Hi !</h4>
-                                        <p>
-                                            <span class="font600">Explore and acquaint yourself with me and my work. I'm always eager for new opportunities and collaborations, so feel free to reach out!</span>
-                                        </p>
-
-                                        
-                                    </div>
-
-
-                                    <P class="space50"></P>
-
-
-                                    
-
-                                    <p class="space50"></p>
+                            
 
 
                                 </div> <!-- end abt-me -->
@@ -164,18 +164,6 @@
                             </div>
 
                         </div>
-                                    
-
-
-                                        <li class="create_by_mb">
-
-                                     <span class="info1">
-
-                                        Created by:  <a href="index.html#" target="_blank"></a>
-
-                                    </span>
-
-                                        </li>
 
                                     </ul>
 
@@ -193,11 +181,8 @@
                 <div class="button_container btn-4" id="toggle">
 
                     <div class="op_menu">
-
-                        <span>CLICK</span><br>
-
-                        <span>HERE</span>
-
+                        <span>MENU</span><br>
+                        <span></span>
                     </div>
 
 
@@ -222,20 +207,67 @@
 
 
 <div id='container'><!--  <div class="bar"></div> --></div>
+<!--sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss-->
+<div class="socialReasonBar animateList visible">
 
-
+    <ul>
+        <li><a href="https://qr.dhakalsushant.com.np" target="_blank">qr.dhakalsushant.com.np</a></li>
+        <li><a href="https://crop.dhakalsushant.com.np" target="_blank">crop.dhakalsushant.com.np</a></li>
+        <li><a href="https://encrypt.dhakalsushant.com.np" target="_blank">encrypt.dhakalsushant.com.np</a></li>
+        <li><a href="https://win.dhakalsushant.com.np" target="_blank">win.dhakalsushant.com.np</a></li>
+        <li><a href="https://paint.dhakalsushant.com.np" target="_blank">paint.dhakalsushant.com.np</a></li>
+        <li><a href="https://mob.dhakalsushant.com.np" target="_blank">mob.dhakalsushant.com.np</a></li>
+        <li><a href="https://notes.dhakalsushant.com.np" target="_blank">notes.dhakalsushant.com.np</a></li>
+        <li><a href="https://google.dhakalsushant.com.np" target="_blank">google.dhakalsushant.com.np</a></li>
+      </ul>
+      
+      
+  </div>
+  <style>
+    *{margin:0; padding:0}
+    .animateList{ max-width:90%; width:460px; position:absolute; top:86%; left:61%; transform: translate(-50%,-50%); -webkit-transform: translate(-50%,-50%);}
+  .animateList{height:34px; overflow:hidden; background-color:#232934;}
+  .animateList ul{margin:0; padding:0; transition: all 0.7s ease;}
+  
+  .animateList ul li {
+      list-style: none; line-height: 26px; padding: 4px 6px;
+      text-transform: uppercase;
+      font-family: monospace, verdana;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $( document ).ready(function() {
+    
+    var $item = $('.animateList').find('li');
+    var l = $item.length, range = $item.innerHeight(), i = 0, up = 1;
+    setInterval(function(){ 
+        if(up == 1){  i++; }else{ i--; }
+        if(i == (l-1)){  up = 0; }else if(i == 0){ up = 1; }
+        $('.animateList ul').css('transform', 'translateY(-'+ (range * i) +'px)');
+    }, 2500);
+    
+  });
+  </script>
+  <!--ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss-->
+  
 <div class="main_content text-center">
 
     <h4 class="adp_head"> </h4>
-	<h2 class="change_head">Hello World !</h2>
-
+	<h3 class="change_head">Hello World !</h3>
+<br>
    <p class=" fsize16 font600">
 
-	    I am Sushant Dhakal.<br>While not formally classified as a professional web developer, I possess the capability to craft websites,<br>leveraging my penchant for experimentation and diversification of skills.<br> I thrive on the pursuit of knowledge across the diverse spectrum of life's offerings. <br>This innate curiosity fuels my endeavors, be it in the realm of web design or any other facet of existence. <br>My portfolio encapsulates my journey of exploration and adaptation,<br> reflecting the myriad endeavors I've undertaken in the perpetual quest for newfound wisdom and creative expression. </p></br><h6>Available for freelancing.</h6>
+    <h4>
+        I'm Sushant Dhakal, not formally a professional web developer,<br> but skilled in crafting websites through experimentation and diverse skills.<br>
+        I'm driven by a curiosity for knowledge across life's spectrum, <br>whether in web design or other facets.<br>
+        My portfolio reflects my ongoing journey of exploration and adaptation<br> in the pursuit of wisdom and creative expression.
+      </h4>
 
     </p>
 
     <a href="under/under.html" class="text-yellow fsize12 font600">
+        <br>
 	<br>
          v061.0.101.69.04
 	 </br>
