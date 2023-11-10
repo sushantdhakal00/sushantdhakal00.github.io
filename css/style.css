@@ -1837,7 +1837,7 @@ footer .ft_menu ul li a:hover {
     }
 
     .overlay .main_menu li span {
-        font-size: 14px;
+        font-size: 7px;
     }
 
     .year_list ul {
@@ -2424,7 +2424,7 @@ footer .ft_menu ul li a:hover {
 
 @media (max-width: 1399px) {
     .overlay .main_menu li a {
-        font-size: 40px;
+        font-size: 18px;
     }
 
     .overlay nav {
