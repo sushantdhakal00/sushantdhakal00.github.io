@@ -17,6 +17,12 @@ body {
     overflow-x: hidden;
 }
 
+canvas {
+    position: absolute;
+    top: 0%;
+    left: 41%;
+}
+
 .img-team {
     display: block;
     height: auto;
@@ -445,7 +451,7 @@ a:focus, a:active, button:focus, button:active {
 .overlaid-content {
     position: absolute;
     bottom: 5%;
-    text-align: center;
+   
     width: 100%;
 }
 
@@ -455,10 +461,11 @@ a:focus, a:active, button:focus, button:active {
 
 .logo img {
     padding: 30px;
-    width: 160px;
+    width: 200px;
     opacity: 1 !important;
     /* height: 100% !important;*/
 }
+
 
 .ov_head {
     color: #fff;
@@ -611,6 +618,7 @@ a:focus, a:active, button:focus, button:active {
 #overlay.open .ani19 {
     -webkit-animation-delay: 2.20s;
     animation-delay: 2.20s;
+
 }
 
 #overlay.open .ani20 {
@@ -851,18 +859,7 @@ address a:hover {
 
 }
 
-.button_container2 {
-    position: fixed;
-    top: 50px;
-    right: 140px;
-    height: 64px;
-    width: 64px;
-    cursor: pointer;
-    z-index: 99999;
-    background: url(http://www.bullmonk.com/img/Contact-icon.png) no-repeat;
-    -webkit-transition: opacity .25s ease;
-    transition: opacity .25s ease;
-}
+
 
 .button_container.active {
     background: #ffffff;
@@ -1475,7 +1472,7 @@ footer .ft_menu ul li a:hover {
 }
 
 .ft_logo img {
-    margin-right: 10px;
+    margin-right: 100px;
 }
 
 .email {
@@ -2691,13 +2688,6 @@ path.stroke-thin {
     transition: opacity 0.5s;
 }
 
-.codrops-logo {
-    position: relative;
-    margin: 0 auto 30px;
-    width: 80px;
-    height: 80px;
-    background: url(http://www.bullmonk.com/img/codrops_logo.png) no-repeat 50% 50%;
-}
 
 .demo-loading .headline {
     position: relative;
