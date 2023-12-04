@@ -4157,13 +4157,119 @@ void main()
 
             <div class="row">
 
+				<canvas id="canvas"></canvas>
 
-                <div class="logo">
+  <!-- Add your other body content here -->
+<script>
+    function Particle(x, y, c, s) {
+      this.x = x;
+      this.y = y;
+      this.vx = 0;
+      this.vy = 0;
 
-                    <a href="frogs.html"><img src="ringmaster/upload/images/Logo&#32;Website&#32;light__2047443159390.png"
-                                             alt="logo"></a>
+      this.s = s;
+      this.c = c;
 
-                </div>
+      this.sx = x;
+      this.sy = y;
+
+      this.time = Date.now();
+    }
+
+    Particle.prototype = {
+      constructor: Particle,
+      update: function () {
+        this.vx = (this.sx - this.x) / 100; // Adjust the divisor to control speed
+        this.vy = (this.sy - this.y) / 100; // Adjust the divisor to control speed
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap the particles around the canvas
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y > canvas.height) this.y = 0;
+      },
+      render: function (context) {
+        context.beginPath();
+        context.fillStyle = this.c;
+        context.fillRect(this.x, this.y, this.s, this.s);
+        context.closePath();
+      }
+    };
+
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        image = new Image(),
+        particle_size = 3,
+        canvas_scale = 1,
+        height, width, arr = [];
+
+    image.crossOrigin = "Anonymous";
+    image.src = "https://scontent.xx.fbcdn.net/v/t1.15752-9/405965462_364010136028355_5056272824196402679_n.png?stp=dst-png_s206x206&_nc_cat=102&ccb=1-7&_nc_sid=510075&_nc_ohc=qC-p2i2edEUAX9iAZXC&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdQbWu-A5GDq6yEF2A2l9fjz2ge92FzuYAvLHlQFg48GlQ&oe=65956A32";
+    image.onload = init;
+
+    function init() {
+      height = canvas.height = image.height * canvas_scale;
+      width = canvas.width = image.width * canvas_scale;
+
+      context.drawImage(image, 10, 10, image.width, image.height, 10, 10, width, height);
+      var idata = context.getImageData(0, 0, width, height),
+          data = idata.data;
+      context.clearRect(0, 0, width, height);
+
+      for (var y = 0; y < height; y += particle_size * canvas_scale) {
+        for (var x = 0; x < width; x += particle_size * canvas_scale) {
+          var o = x * 4 + y * 4 * idata.width;
+          if (data[o + 3] > 210) {
+            var c = 'rgba(' + data[o] + ',' + data[o + 1] + ',' + data[o + 2] + ',' + data[o + 3] + ')',
+                p = new Particle(x, y, c, particle_size);
+            p.x = Math.random() * width;
+            p.y = Math.random() * height;
+            arr.push(p);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', force);
+
+      update();
+      render();
+    }
+
+   
+    function force(e) {
+      var x = e.clientX,
+          y = e.clientY;
+      for (var i = 0, l = arr.length; i < l; i++) {
+        var dx = x - arr[i].x,
+            dy = y - arr[i].y,
+            d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 64) {
+          var r = Math.atan2(dy, dx);
+          arr[i].vx = -(d) * Math.cos(r);
+          arr[i].vy = -(d) * Math.sin(r);
+        }
+      }
+    }
+
+    function update() {
+      for (var i = 0, l = arr.length; i < l; i++) {
+        arr[i].update();
+      }
+      setTimeout(update, 100 / 30);
+    }
+
+    function render() {
+      context.clearRect(0, 0, width, height);
+      for (var i = 0, l = arr.length; i < l; i++) {
+        arr[i].render(context);
+      }
+      requestAnimationFrame(render);
+    }
+  </script>
+
 
 
                 <div class="overlay" id="overlay"><!-- start overlay for menu -->
@@ -4314,8 +4420,8 @@ void main()
   </div>
   <style>
     *{margin:0; padding:0}
-    .animateList{ max-width:90%; width:460px; position:absolute; top:86%; left:61%; transform: translate(-50%,-50%); -webkit-transform: translate(-50%,-50%);}
-  .animateList{height:34px; overflow:hidden; background-color:#101111;}
+    .animateList{ max-width:90%; width:460px; position:absolute; top:91%; left:61%; transform: translate(-50%,-50%); -webkit-transform: translate(-50%,-50%);}
+  .animateList{height:35px; overflow:hidden; background-color:#101111;}
   .animateList ul{margin:0; padding:0; transition: all 0.7s ease;}
   
   .animateList ul li {
@@ -4342,15 +4448,16 @@ void main()
   
 <div class="main_content text-center">
 
-    <h4 class="adp_head"> </h4>
+    
 	<h3 class="change_head">Hello World !</h3>
 <br>
    <p class=" fsize16 font600">
+	
 
     <h4>
-        I'm Sushant Dhakal, not formally a professional web developer,<br> but skilled in crafting websites through experimentation and diverse skills.<br>
-        I'm driven by a curiosity for knowledge across life's spectrum, <br>whether in web design or other facets.<br>
-        My portfolio reflects my ongoing journey of exploration and adaptation<br> in the pursuit of wisdom and creative expression.
+        I'm Sushant Dhakal, not formally<br> a professional web developer,<br> but skilled in crafting websites <br>through experimentation and diverse skills.<br>
+        I'm driven by a curiosity for <br> knowledge across life's spectrum, <br>whether in web design or other facets.<br>
+        My portfolio reflects my ongoing journey <br> of exploration and adaptation in the pursuit <br> of wisdom and creative expression.
       </h4>
 
     </p>
