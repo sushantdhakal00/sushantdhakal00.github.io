@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sushant Dhakal — Builder, Founder & Civil Engineer</title>
+  <meta name="description" content="Sushant Dhakal — civil engineer and builder from Nepal. Founder of Moringa Nepal. Building on Solana.">
+  <link rel="icon" type="image/png" href="img/diamond.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f8;
+      --ink: #111;
+      --muted: #8a8a8a;
+      --line: #ddd;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    ::selection { background: var(--ink); color: var(--bg); }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.4rem 2.5rem 3rem;
+    }
+
+    .col { max-width: 880px; margin: 0 auto; }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 1.5rem 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-height: 1.65em;
+    }
+
+    .name {
+      margin: 0;
+      font: inherit;
+      font-weight: 500;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--ink);
+      flex: none;
+    }
+
+    .caret::after {
+      content: '';
+      display: inline-block;
+      width: 1px;
+      height: 1.05em;
+      margin-left: 2px;
+      vertical-align: -0.15em;
+      background: currentColor;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .bio p { margin: 0 0 0.6rem; }
+
+    .contact {
+      font-size: 12px;
+      margin-top: 0.9rem;
+    }
+
+    .contact a,
+    .row a,
+    footer a {
+      background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.3s;
+    }
+
+    .contact a:hover,
+    .row a:hover,
+    footer a:hover { background-size: 100% 1px; }
+
+    .sep { color: var(--muted); margin: 0 0.4rem; }
+
+    .list { margin: 0; padding: 0; list-style: none; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 0.45rem 0;
+      line-height: 1.7;
+    }
+
+    .row .what { font-weight: 500; }
+
+    .row .desc {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+    }
+
+    .row:hover .desc,
+    .row:focus-within .desc {
+      max-height: 4.5em;
+      opacity: 1;
+    }
+
+    .more { color: var(--muted); margin: 0.8rem 0 0; }
+
+    .caption {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 0 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .grid span {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 3 / 2;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .grid span:hover { background: var(--ink); color: var(--bg); }
+
+    footer { font-size: 12px; margin-top: 1.4rem; }
+
+    footer p { margin: 0; }
+
+    footer .tag { color: var(--muted); }
+
+    @media (hover: none) {
+      .row .desc { max-height: none; opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 1.6rem 1.25rem 2.4rem; }
+      body { font-size: 14px; }
+      .row { grid-template-columns: 9.4rem 1fr; gap: 0.8rem; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .caret::after { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="col">
+      <header>
+        <a class="dot" href="index.html" aria-label="Back to the immersive site" title="Back to the immersive site"></a>
+        <h1 class="name"><span id="name" class="caret" data-text="Sushant Dhakal">Sushant Dhakal</span></h1>
+      </header>
+
+      <hr>
+
+      <section class="bio">
+        <p>Civil engineer and builder from Nepal. I founded Moringa Nepal, an agriculture company, and I build on Solana: hospital-verified crowdfunding for rare disease care, and verifiable institutional payments.</p>
+        <p>I also design and ship websites for organisations across Nepal.</p>
+        <p class="contact">
+          <a href="https://github.com/sushantdhakal00" target="_blank" rel="noopener noreferrer">GitHub</a><span class="sep">·</span><a href="https://dhak.al" target="_blank" rel="noopener noreferrer">dhak.al</a><span class="sep">·</span><a href="index.html">Immersive site</a>
+        </p>
+      </section>
+
+      <hr>
+
+      <ul class="list">
+        <li class="row">
+          <span>Founder</span>
+          <span><a class="what" href="https://moringanepal.com" target="_blank" rel="noopener noreferrer">Moringa Nepal</a><span class="desc">Agriculture company built around moringa grown in Nepal.</span></span>
+        </li>
+        <li class="row">
+          <span>Health · Solana</span>
+          <span><a class="what" href="https://rarediseasecf.com" target="_blank" rel="noopener noreferrer">RareDiseaseCF</a><span class="desc">Hospital-verified crowdfunding, with USDC held in on-chain escrow and released in milestones.</span></span>
+        </li>
+        <li class="row">
+          <span>Fintech · Solana</span>
+          <span><a class="what" href="https://github.com/sushantdhakal00/Kharcha-Pay" target="_blank" rel="noopener noreferrer">KharchaPay</a><span class="desc">Institutional spend management with verifiable on-chain payments.</span></span>
+        </li>
+        <li class="row">
+          <span>Discord · Python</span>
+          <span><a class="what" href="https://github.com/sushantdhakal00/tippy" target="_blank" rel="noopener noreferrer">Tippy</a><span class="desc">Economy bot with crypto tipping, live prices, poker and mini-games.</span></span>
+        </li>
+        <li class="row">
+          <span>Web</span>
+          <span><a class="what" href="https://warnnepal.com" target="_blank" rel="noopener noreferrer">WARN Nepal</a><span class="desc">Website built for WARN Nepal.</span></span>
+        </li>
+        <li class="row">
+          <span>Web</span>
+          <span><a class="what" href="https://greensoultions.com.np" target="_blank" rel="noopener noreferrer">Green Solutions</a><span class="desc">Website built for Green Solutions.</span></span>
+        </li>
+        <li class="row">
+          <span>Identity</span>
+          <span><a class="what" href="https://dhak.al" target="_blank" rel="noopener noreferrer">dhak.al</a><span class="desc">Short-link domain and personal identity.</span></span>
+        </li>
+      </ul>
+      <p class="more"><span id="more" data-text="And more in orbit">And more in orbit</span></p>
+
+      <hr>
+
+      <p class="caption">Tools I build with</p>
+      <div class="grid">
+        <span>Solana</span>
+        <span>Rust · Anchor</span>
+        <span>TypeScript</span>
+        <span>React</span>
+        <span>Python</span>
+        <span>Three.js</span>
+        <span>PostgreSQL</span>
+        <span>Vercel</span>
+      </div>
+
+      <footer>
+        <p>© 2026 Sushant Dhakal.</p>
+        <p class="tag">Civil engineer by day, pixel pilot by night.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      function type(el, delay, done) {
+        var text = el.dataset.text;
+        var i = 0;
+        el.textContent = '';
+        setTimeout(function step() {
+          el.textContent = text.slice(0, ++i);
+          if (i < text.length) setTimeout(step, 55 + Math.random() * 60);
+          else if (done) done();
+        }, delay);
+      }
+      var name = document.getElementById('name');
+      var more = document.getElementById('more');
+      type(name, 300, function () {
+        name.classList.remove('caret');
+        more.classList.add('caret');
+        type(more, 500);
+      });
+    })();
+  </script>
+</body>
+</html>

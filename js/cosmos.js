@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -261,10 +259,15 @@ class Sound {
 }
 
 /* ======================================================================
-   Particle field — lives in the same world space as the black hole
+   Particle field — rendered inside the black hole's own space scene,
+   so it shares its renderer and is bent by the same lensing pass
    ====================================================================== */
 
 const vertexShader = /* glsl */ `
+precision highp float;
+
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
 uniform float uTime;
 uniform float uSecA;
 uniform float uSecB;
@@ -276,18 +279,19 @@ uniform float uShockT;
 uniform float uWarp;
 uniform float uSize;
 uniform float uViewH;
+uniform float uPx;
 uniform float uAspect;
 uniform float uMouseStr;
 uniform vec2 uMouse;
 uniform vec3 uAxis;
 
-attribute vec4 aSeed;
-attribute vec3 aRand;
-attribute float aScale;
+in vec4 aSeed;
+in vec3 aRand;
+in float aScale;
 
-varying vec3 vColor;
-varying float vAlpha;
-varying float vPs;
+out vec3 vColor;
+out float vAlpha;
+out float vPs;
 
 const float PI = 3.14159265;
 const float TAU = 6.2831853;
@@ -433,22 +437,28 @@ void main() {
   float shapeSize = mix(sA, sB, t);
   float scale = mix(min(aScale, 1.0), aScale, shapeSize >= 1.0 ? 1.0 : 0.0) * shapeSize;
   float size = uSize * scale * (1.0 + wave * 1.6 + push * 0.9);
+  // Sizes are worked out in CSS pixels, then scaled to the render target.
   float ps = size * projectionMatrix[1][1] * uViewH * 0.5 / -mv.z;
   float energy = ps < 2.0 ? max(ps, 0.05) / 2.0 : 1.0;
-  gl_PointSize = clamp(ps, 2.0, 56.0);
+  float psc = clamp(ps, 2.0, 56.0);
+  gl_PointSize = psc * uPx;
 
   float nearFade = smoothstep(0.25, 1.6, -mv.z);
   float twinkle = 0.72 + 0.28 * sin(uTime * 3.0 + aSeed.z * 60.0);
   vAlpha = alpha * energy * nearFade * twinkle * (1.0 + uWarp * 0.7);
   vColor = col;
-  vPs = gl_PointSize;
+  vPs = psc;
 }
 `;
 
 const fragmentShader = /* glsl */ `
-varying vec3 vColor;
-varying float vAlpha;
-varying float vPs;
+precision highp float;
+
+in vec3 vColor;
+in float vAlpha;
+in float vPs;
+
+layout(location = 0) out vec4 pc_FragColor;
 
 void main() {
   vec2 uv = gl_PointCoord - 0.5;
@@ -457,27 +467,23 @@ void main() {
   float sharp = mix(3.0, 40.0, smoothstep(2.0, 14.0, vPs));
   float core = exp(-d * sharp);
   float halo = exp(-d * 12.0) * 0.3 * smoothstep(3.0, 10.0, vPs);
-  float a = (core + halo) * vAlpha * 0.75;
-  gl_FragColor = vec4(vColor * a, a);
+  float a = (core + halo) * vAlpha * 0.62;
+  pc_FragColor = vec4(vColor * a, a);
 }
 `;
 
+// Built from the black hole bundle's own Three.js classes, so the page
+// only ships and runs a single engine and a single WebGL context.
 class Field {
-  constructor(canvas) {
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: false,
-      powerPreference: 'high-performance',
-    });
-    this.renderer.setClearColor(0x000000, 0);
-    this.dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-    this.renderer.setPixelRatio(this.dpr);
+  constructor(bh) {
+    this.bh = bh;
+    const ref = bh.world.stars.particles;
+    const Geometry = ref.geometry.constructor;
+    const Attribute = ref.geometry.attributes.aSize.constructor;
+    const Material = ref.material.constructor;
+    const Points = ref.points.constructor;
 
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 1000);
-
-    const count = reduced ? 16000 : isTouch ? 34000 : 80000;
+    const count = reduced ? 16000 : isTouch ? 30000 : 80000;
     const seed = new Float32Array(count * 4);
     const rand = new Float32Array(count * 3);
     const scale = new Float32Array(count);
@@ -496,11 +502,11 @@ class Field {
       scale[i] = 0.35 + Math.pow(Math.random(), 7) * 2.8;
     }
 
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(count * 3), 3));
-    geo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 4));
-    geo.setAttribute('aRand', new THREE.BufferAttribute(rand, 3));
-    geo.setAttribute('aScale', new THREE.BufferAttribute(scale, 1));
+    const geo = new Geometry();
+    geo.setAttribute('position', new Attribute(new Float32Array(count), 1));
+    geo.setAttribute('aSeed', new Attribute(seed, 4));
+    geo.setAttribute('aRand', new Attribute(rand, 3));
+    geo.setAttribute('aScale', new Attribute(scale, 1));
 
     this.uniforms = {
       uTime: { value: 0 },
@@ -512,40 +518,38 @@ class Field {
       uPulse: { value: 0 },
       uShockT: { value: -1 },
       uWarp: { value: 0 },
-      uSize: { value: isTouch ? 0.05 : 0.04 },
-      uViewH: { value: innerHeight * this.dpr },
-      uAspect: { value: innerWidth / innerHeight },
+      uSize: { value: 0.04 },
+      uViewH: { value: 900 },
+      uPx: { value: 2 },
+      uAspect: { value: 1.6 },
       uMouseStr: { value: 0 },
-      uMouse: { value: new THREE.Vector2(9, 9) },
-      uAxis: { value: new THREE.Vector3(1, 0, 0) },
+      uMouse: { value: [9, 9] },
+      uAxis: { value: [1, 0, 0] },
     };
 
-    const mat = new THREE.ShaderMaterial({
+    const mat = new Material({
+      glslVersion: ref.material.glslVersion,
       uniforms: this.uniforms,
       vertexShader,
       fragmentShader,
       transparent: true,
       depthWrite: false,
       depthTest: false,
-      blending: THREE.AdditiveBlending,
+      blending: bh.world.blackHole.disc.material.blending,
     });
 
-    this.points = new THREE.Points(geo, mat);
+    this.points = new Points(geo, mat);
     this.points.frustumCulled = false;
-    this.scene.add(this.points);
+    this.points.visible = false;
+    bh.scenes.space.add(this.points);
     this.resize();
   }
 
   resize() {
-    this.renderer.setSize(innerWidth, innerHeight);
-    this.uniforms.uViewH.value = innerHeight * this.dpr;
-    this.uniforms.uAspect.value = innerWidth / innerHeight;
-    this.camera.aspect = innerWidth / innerHeight;
-    this.camera.updateProjectionMatrix();
-  }
-
-  render() {
-    this.renderer.render(this.scene, this.camera);
+    const { width, height } = this.bh.config;
+    this.uniforms.uViewH.value = height;
+    this.uniforms.uPx.value = this.bh.renderer.composition.space.height / height;
+    this.uniforms.uAspect.value = width / height;
   }
 }
 
@@ -554,8 +558,15 @@ class Field {
    ====================================================================== */
 
 const sound = new Sound();
-const BH = window.__BH && window.__BH.camera ? window.__BH : null;
-const field = new Field($('#cosmos'));
+const BH = window.__BH && window.__BH.camera && window.__BH.world ? window.__BH : null;
+let field = null;
+if (BH) {
+  try {
+    field = new Field(BH);
+  } catch (err) {
+    console.warn('Particle field unavailable', err);
+  }
+}
 
 const state = {
   entered: false,
@@ -576,7 +587,7 @@ const state = {
   spin: 0,
   shockT: -1,
   pose: { r: 8.6, el: 0.2, az: 0.78, off: 0, offY: 0 },
-  camPos: new THREE.Vector3(),
+  camPos: { x: 0, y: 0, z: 8.6 },
   last: performance.now(),
   t0: performance.now(),
 };
@@ -603,7 +614,7 @@ function computeS() {
 }
 
 function sphericalFromVec(v) {
-  const r = v.length();
+  const r = Math.hypot(v.x, v.y, v.z) || 1;
   return { r, el: Math.asin(clamp(v.y / r, -1, 1)), az: Math.atan2(v.z, v.x) };
 }
 
@@ -615,7 +626,7 @@ function targetPose(time) {
   const B = KEYS[i + 1];
   const narrow = innerWidth < 820;
   const pose = {
-    r: Math.exp(lerp(Math.log(A.r), Math.log(B.r), f)),
+    r: Math.exp(lerp(Math.log(A.r), Math.log(B.r), f)) * portraitFit(),
     el: lerp(A.el, B.el, f),
     az: lerp(A.az, B.az, f),
     off: narrow ? 0 : lerp(A.off, B.off, f),
@@ -648,7 +659,9 @@ function drive() {
   state.pose = pose;
 
   const ce = Math.cos(pose.el);
-  state.camPos.set(pose.r * ce * Math.cos(pose.az), pose.r * Math.sin(pose.el), pose.r * ce * Math.sin(pose.az));
+  state.camPos.x = pose.r * ce * Math.cos(pose.az);
+  state.camPos.y = pose.r * Math.sin(pose.el);
+  state.camPos.z = pose.r * ce * Math.sin(pose.az);
 
   if (BH) {
     const cam = BH.camera;
@@ -662,25 +675,42 @@ function drive() {
   }
 }
 
+// The whole site ticks inside the black hole's frame loop, right before it renders.
 if (BH) {
   const orig = BH.camera.update.bind(BH.camera);
   BH.camera.update = () => {
-    if (state.entered) drive();
+    frame(performance.now());
     orig();
   };
+
+  // Mobile browsers fire resize whenever the address bar slides; the canvas is
+  // sized to 100vh and doesn't change, so skip the costly re-allocation.
+  const origResize = BH.resize.bind(BH);
+  let last = '';
+  BH.resize = () => {
+    const r = BH.targetElement.getBoundingClientRect();
+    const key = `${Math.round(r.width)}x${Math.round(r.height)}@${window.devicePixelRatio}`;
+    if (key === last) return;
+    last = key;
+    origResize();
+    field?.resize();
+    measure();
+  };
+  last = `${Math.round(BH.config.width)}x${Math.round(BH.config.height)}@${window.devicePixelRatio}`;
+
+  // The loader camera is framed for landscape; on a portrait phone the disc
+  // overflows the narrow horizontal field of view, so back it off to fit.
+  const fit = portraitFit();
+  if (fit > 1) {
+    const dbg = BH.camera.modes.debug;
+    dbg.instance.position.multiplyScalar(fit);
+    dbg.orbitControls.update();
+  }
 }
 
-function syncFieldCamera() {
-  const c = field.camera;
-  c.position.copy(state.camPos);
-  c.lookAt(0, 0, 0);
-  if (BH) {
-    c.projectionMatrix.fromArray(BH.camera.instance.projectionMatrix.elements);
-    c.projectionMatrixInverse.copy(c.projectionMatrix).invert();
-  } else {
-    c.fov = 45 + state.warp * 14;
-    c.setViewOffset(innerWidth, innerHeight, state.pose.off * innerWidth, state.pose.offY * innerHeight, innerWidth, innerHeight);
-  }
+function portraitFit() {
+  const aspect = innerWidth / innerHeight;
+  return clamp(Math.sqrt(1.1 / aspect), 1, 1.6);
 }
 
 /* ---------------- HUD ---------------- */
@@ -768,7 +798,6 @@ function updateStages() {
 /* ---------------- Main loop ---------------- */
 
 function frame(now) {
-  requestAnimationFrame(frame);
   const dt = Math.min(0.05, (now - state.last) / 1000);
   state.last = now;
   const time = (now - state.t0) / 1000;
@@ -806,7 +835,8 @@ function frame(now) {
     if (state.shockT > 4) state.shockT = -1;
   }
 
-  if (!BH && state.entered) drive();
+  if (state.entered) drive();
+  if (!field) return;
 
   const u = field.uniforms;
   u.uTime.value = time;
@@ -819,15 +849,17 @@ function frame(now) {
   u.uPulse.value = state.pulse;
   u.uShockT.value = state.shockT;
   u.uWarp.value = state.warp;
-  u.uSize.value = (isTouch ? 0.075 : 0.06) * (0.55 + state.pose.r * 0.05);
-  u.uMouse.value.set(m.x, m.y);
+  u.uSize.value = (isTouch ? 0.044 : 0.048) * (0.55 + state.pose.r * 0.05);
+  u.uMouse.value[0] = m.x;
+  u.uMouse.value[1] = m.y;
   u.uMouseStr.value = isTouch ? 0 : m.str;
-  u.uAxis.value.copy(state.camPos).normalize();
+  const c = state.camPos;
+  const cl = Math.hypot(c.x, c.y, c.z) || 1;
+  u.uAxis.value[0] = c.x / cl;
+  u.uAxis.value[1] = c.y / cl;
+  u.uAxis.value[2] = c.z / cl;
 
-  if (state.reveal > 0.001) {
-    syncFieldCamera();
-    field.render();
-  }
+  field.points.visible = state.reveal > 0.001;
 }
 
 /* ---------------- Interactions ---------------- */
@@ -965,7 +997,7 @@ function enter() {
 
   if (BH) {
     const dbg = BH.camera.modes.debug.instance;
-    state.from = sphericalFromVec(new THREE.Vector3(dbg.position.x, dbg.position.y, dbg.position.z));
+    state.from = sphericalFromVec(dbg.position);
     BH.camera.mode = 'default';
   } else {
     state.from = { r: 7.35, el: 0.27, az: 0.78 };
@@ -1052,14 +1084,16 @@ function init() {
     sound.boom(0.4);
   });
 
-  addEventListener('resize', () => {
-    field.resize();
-    measure();
-  });
   new ResizeObserver(() => measure()).observe(document.body);
 
   document.documentElement.classList.add('cosmos-ready');
-  requestAnimationFrame(frame);
+  if (!BH) {
+    const loop = (now) => {
+      frame(now);
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
 }
 
 init();
