@@ -1,57 +1,23 @@
-
 <!DOCTYPE html>
-
-<html>
-
-	
-	
+<html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <title>Hello World!</title>
-
-    <meta charset="utf-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name=‘description
-          content=‘Porrtfolio site of Brainiac = Sushant ’/>
-
-    <meta property=‘og:description’
-          content=‘Porrtfolio site of Brainiac = Sushant’/>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- link for favicon -->
-    <link rel="icon" type="image/png" href="img/diamond.png">
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- for preloader -->
-
-    <link rel="stylesheet" type="text/css" href="css/component.css"/>
-
-    <link rel='stylesheet' id='box-roll-css' href='css/box_roll.css' type='text/css' media='all'/>
-
-    <script>document.documentElement.className = 'js';</script>
-
-    
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sushant Dhakal — Beyond the Event Horizon</title>
+  <meta name="description" content="The immersive portfolio of Sushant Dhakal — civil engineer and web tinkerer from Nepal. Fall through a black hole to see the work.">
+  <meta property="og:title" content="Sushant Dhakal — Beyond the Event Horizon">
+  <meta property="og:description" content="A black hole, 80,000 particles and seven worlds of work.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/png" href="img/diamond.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/immersive.css">
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
 </head>
+<body>
 
-
-<body id="home">
-
-<div id="preloader" class="preloader desc_preloader text-center">
-
-    <div class="os-phrases" id="os-phrases">
-
-        <div class="experience"></div>
+  <div id="blackhole" aria-hidden="true">
+    <div class="experience"></div>
 <style>
     *
 {
@@ -4141,459 +4107,164 @@ void main()
 
     pc_FragColor = vec4(vColor, 1.0);
     
-}`;function nx(){return new jn({glslVersion:Tn,depthWrite:!1,depthTest:!1,uniforms:{uViewHeight:{value:1024},uSize:{value:.001}},vertexShader:ex,fragmentShader:tx})}class ix{constructor(){this.experience=new Zt,this.config=this.experience.config,this.scenes=this.experience.scenes,this.time=this.experience.time,this.debug=this.experience.debug,this.sizes=this.experience.sizes,this.camera=this.experience.camera,this.renderer=this.experience.renderer,this.setParticles()}setParticles(){this.particles={},this.particles.count=5e4;const e=new Float32Array(this.particles.count*3),t=new Float32Array(this.particles.count),n=new Float32Array(this.particles.count*3);for(let i=0;i<this.particles.count;i++){const s=i*3,a=2*Math.PI*Math.random(),o=Math.acos(2*Math.random()-1),l=Math.cos(a)*Math.sin(o)*400,c=Math.sin(a)*Math.sin(o)*400,u=Math.cos(o)*400;e[s+0]=l,e[s+1]=c,e[s+2]=u,t[i]=Math.random();const h=new de(`hsl(${Math.round(360*Math.random())}, 100%, 80%)`);n[s+0]=h.r,n[s+1]=h.g,n[s+2]=h.b}this.particles.geometry=new ct,this.particles.geometry.setAttribute("position",new Xe(e,3)),this.particles.geometry.setAttribute("aSize",new Xe(t,1)),this.particles.geometry.setAttribute("aColor",new Xe(n,3)),this.particles.material=new nx,this.particles.material.uniforms.uViewHeight.value=this.renderer.composition.space.height,this.particles.points=new co(this.particles.geometry,this.particles.material),this.particles.points.frustumCulled=!1,this.scenes.space.add(this.particles.points)}resize(){this.particles.material.uniforms.uViewHeight.value=this.sizes.height}update(){}}class sx{constructor(e){this.experience=new Zt,this.config=this.experience.config,this.scenes=this.experience.scenes,this.resources=this.experience.resources,this.blackHole=new Q_,this.stars=new ix}resize(){this.blackHole&&this.blackHole.resize()}update(){this.blackHole&&this.blackHole.update()}destroy(){}}var rx=[{name:"base",data:{},items:[]}];const Ts=class{constructor(e={}){if(Ts.instance)return Ts.instance;if(Ts.instance=this,this.targetElement=e.targetElement,!this.targetElement){console.warn("Missing 'targetElement' property");return}this.time=new Y0,this.sizes=new K0,this.setConfig(),this.setDebug(),this.setScenes(),this.setCamera(),this.setRenderer(),this.setResources(),this.setWorld(),this.sizes.on("resize",()=>{this.resize()}),this.update()}setConfig(){this.config={},this.config.pixelRatio=Math.min(Math.max(window.devicePixelRatio,1),2);const e=this.targetElement.getBoundingClientRect();this.config.width=e.width,this.config.height=e.height||window.innerHeight}setDebug(){this.debug=new dv}setScenes(){this.scenes={},this.scenes.space=new ws,this.scenes.distortion=new ws,this.scenes.overlay=new ws}setCamera(){this.camera=new O_}setRenderer(){this.renderer=new N_({rendererInstance:this.rendererInstance}),this.targetElement.appendChild(this.renderer.instance.domElement)}setResources(){this.resources=new P_(rx)}setWorld(){this.world=new sx}update(){this.stats&&this.stats.update(),this.world&&this.world.update(),this.camera.update(),this.renderer&&this.renderer.update(),window.requestAnimationFrame(()=>{this.update()})}resize(){const e=this.targetElement.getBoundingClientRect();this.config.width=e.width,this.config.height=e.height,this.config.pixelRatio=Math.min(Math.max(window.devicePixelRatio,1),2),this.camera&&this.camera.resize(),this.renderer&&this.renderer.resize(),this.world&&this.world.resize()}destroy(){}};let Zt=Ts;Xr(Zt,"instance");new Zt({targetElement:document.querySelector(".experience")});
+}`;function nx(){return new jn({glslVersion:Tn,depthWrite:!1,depthTest:!1,uniforms:{uViewHeight:{value:1024},uSize:{value:.001}},vertexShader:ex,fragmentShader:tx})}class ix{constructor(){this.experience=new Zt,this.config=this.experience.config,this.scenes=this.experience.scenes,this.time=this.experience.time,this.debug=this.experience.debug,this.sizes=this.experience.sizes,this.camera=this.experience.camera,this.renderer=this.experience.renderer,this.setParticles()}setParticles(){this.particles={},this.particles.count=5e4;const e=new Float32Array(this.particles.count*3),t=new Float32Array(this.particles.count),n=new Float32Array(this.particles.count*3);for(let i=0;i<this.particles.count;i++){const s=i*3,a=2*Math.PI*Math.random(),o=Math.acos(2*Math.random()-1),l=Math.cos(a)*Math.sin(o)*400,c=Math.sin(a)*Math.sin(o)*400,u=Math.cos(o)*400;e[s+0]=l,e[s+1]=c,e[s+2]=u,t[i]=Math.random();const h=new de(`hsl(${Math.round(360*Math.random())}, 100%, 80%)`);n[s+0]=h.r,n[s+1]=h.g,n[s+2]=h.b}this.particles.geometry=new ct,this.particles.geometry.setAttribute("position",new Xe(e,3)),this.particles.geometry.setAttribute("aSize",new Xe(t,1)),this.particles.geometry.setAttribute("aColor",new Xe(n,3)),this.particles.material=new nx,this.particles.material.uniforms.uViewHeight.value=this.renderer.composition.space.height,this.particles.points=new co(this.particles.geometry,this.particles.material),this.particles.points.frustumCulled=!1,this.scenes.space.add(this.particles.points)}resize(){this.particles.material.uniforms.uViewHeight.value=this.sizes.height}update(){}}class sx{constructor(e){this.experience=new Zt,this.config=this.experience.config,this.scenes=this.experience.scenes,this.resources=this.experience.resources,this.blackHole=new Q_,this.stars=new ix}resize(){this.blackHole&&this.blackHole.resize()}update(){this.blackHole&&this.blackHole.update()}destroy(){}}var rx=[{name:"base",data:{},items:[]}];const Ts=class{constructor(e={}){if(Ts.instance)return Ts.instance;if(Ts.instance=this,this.targetElement=e.targetElement,!this.targetElement){console.warn("Missing 'targetElement' property");return}this.time=new Y0,this.sizes=new K0,this.setConfig(),this.setDebug(),this.setScenes(),this.setCamera(),this.setRenderer(),this.setResources(),this.setWorld(),this.sizes.on("resize",()=>{this.resize()}),this.update()}setConfig(){this.config={},this.config.pixelRatio=Math.min(Math.max(window.devicePixelRatio,1),2);const e=this.targetElement.getBoundingClientRect();this.config.width=e.width,this.config.height=e.height||window.innerHeight}setDebug(){this.debug=new dv}setScenes(){this.scenes={},this.scenes.space=new ws,this.scenes.distortion=new ws,this.scenes.overlay=new ws}setCamera(){this.camera=new O_}setRenderer(){this.renderer=new N_({rendererInstance:this.rendererInstance}),this.targetElement.appendChild(this.renderer.instance.domElement)}setResources(){this.resources=new P_(rx)}setWorld(){this.world=new sx}update(){this.stats&&this.stats.update(),this.world&&this.world.update(),this.camera.update(),this.renderer&&this.renderer.update(),window.requestAnimationFrame(()=>{this.update()})}resize(){const e=this.targetElement.getBoundingClientRect();this.config.width=e.width,this.config.height=e.height,this.config.pixelRatio=Math.min(Math.max(window.devicePixelRatio,1),2),this.camera&&this.camera.resize(),this.renderer&&this.renderer.resize(),this.world&&this.world.resize()}destroy(){}};let Zt=Ts;Xr(Zt,"instance");window.__BH=new Zt({targetElement:document.querySelector(".experience")});
 //# sourceMappingURL=index.c2b8a264.js.map
 </script>
-        
+  </div>
+  <canvas id="cosmos" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
+  <div class="intro" id="intro">
+    <div class="intro-inner">
+      <p class="intro-kicker mono">Brainiac // signal acquired</p>
+      <h1 class="intro-title">SUSHANT DHAKAL</h1>
+      <p class="intro-sub">Drag to orbit the singularity. When you're ready, cross the horizon — sound on.</p>
+      <button type="button" class="btn-enter magnetic" id="enter">Enter the void</button>
+      <p class="intro-hint mono">Press Enter · headphones recommended</p>
     </div>
-
-</div>
-<div id="header-outer">  <!-- start header outer -->
-
-    <header><!-- start header -->
-
-        <div class="container-fluid">
-
-            <div class="row">
-
-				<canvas id="canvas"></canvas>
-
-  <!-- Add your other body content here -->
-<script>
-    function Particle(x, y, c, s) {
-      this.x = x;
-      this.y = y;
-      this.vx = 0;
-      this.vy = 0;
-
-      this.s = s;
-      this.c = c;
-
-      this.sx = x;
-      this.sy = y;
-
-      this.time = Date.now();
-    }
-
-    Particle.prototype = {
-      constructor: Particle,
-      update: function () {
-        this.vx = (this.sx - this.x) / 100; // Adjust the divisor to control speed
-        this.vy = (this.sy - this.y) / 100; // Adjust the divisor to control speed
-
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Wrap the particles around the canvas
-        if (this.x < 0) this.x = canvas.width;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y > canvas.height) this.y = 0;
-      },
-      render: function (context) {
-        context.beginPath();
-        context.fillStyle = this.c;
-        context.fillRect(this.x, this.y, this.s, this.s);
-        context.closePath();
-      }
-    };
-
-    var canvas = document.getElementById('canvas'),
-        context = canvas.getContext('2d'),
-        image = new Image(),
-        particle_size = 3,
-        canvas_scale = 1,
-        height, width, arr = [];
-
-    image.crossOrigin = "Anonymous";
-    image.src = "https://www.simpleimageresizer.com/_uploads/photos/c4019de0/437356312_3733780073566645_4049506887819267629_n_2_6.png";
-    image.onload = init;
-
-    function init() {
-      height = canvas.height = image.height * canvas_scale;
-      width = canvas.width = image.width * canvas_scale;
-
-      context.drawImage(image, 10, 10, image.width, image.height, 10, 10, width, height);
-      var idata = context.getImageData(0, 0, width, height),
-          data = idata.data;
-      context.clearRect(0, 0, width, height);
-
-      for (var y = 0; y < height; y += particle_size * canvas_scale) {
-        for (var x = 0; x < width; x += particle_size * canvas_scale) {
-          var o = x * 4 + y * 4 * idata.width;
-          if (data[o + 3] > 210) {
-            var c = 'rgba(' + data[o] + ',' + data[o + 1] + ',' + data[o + 2] + ',' + data[o + 3] + ')',
-                p = new Particle(x, y, c, particle_size);
-            p.x = Math.random() * width;
-            p.y = Math.random() * height;
-            arr.push(p);
-          }
-        }
-      }
-
-      document.addEventListener('mousemove', force);
-
-      update();
-      render();
-    }
-
-   
-    function force(e) {
-      var x = e.clientX,
-          y = e.clientY;
-      for (var i = 0, l = arr.length; i < l; i++) {
-        var dx = x - arr[i].x,
-            dy = y - arr[i].y,
-            d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 64) {
-          var r = Math.atan2(dy, dx);
-          arr[i].vx = -(d) * Math.cos(r);
-          arr[i].vy = -(d) * Math.sin(r);
-        }
-      }
-    }
-
-    function update() {
-      for (var i = 0, l = arr.length; i < l; i++) {
-        arr[i].update();
-      }
-      setTimeout(update, 100 / 30);
-    }
-
-    function render() {
-      context.clearRect(0, 0, width, height);
-      for (var i = 0, l = arr.length; i < l; i++) {
-        arr[i].render(context);
-      }
-      requestAnimationFrame(render);
-    }
-  </script>
-
-
-
-                <div class="overlay" id="overlay"><!-- start overlay for menu -->
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-
-                            <div class="logo">
-
-                                <a href="frogs.html"><img
-                                            src="ringmaster/upload/images/Logo&#32;Website&#32;light__2047443159390.png"
-                                            alt="logo"></a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <nav class="overlay-menu container">
-
-                        <div class="row">
-
-                            <div class="col-md-1"></div>
-
-                            <div class="col-md-5 col-sm-6">
-
-                                <ul class="main_menu">
-                                    <h4>
-                                    <li class="ani1 delay"><a
-                                                href="index.html">Home</a>
-                                        <span>- Homepage</span></li>
-                                     <li class="ani2 delay"><a
-                                            href="contact.html">Contact me</a>
-                                    <span>- Want to reach out to me ?</span></li>
-                                    
-
-                                    
-                                     
-<body>
-    
-    <input type="text" id="secretInput">
-    <button onclick="openHiddenPage()">Open Hidden Page</button>
-
-    <script>
-        function openHiddenPage() {
-            var secretText = document.getElementById("secretInput").value;
-            if (secretText === "hehe") {
-                // Change "your_secret_text_here" to the actual secret text
-                window.location.href = "hidden_page.html";
-            } else {
-                alert("Incorrect secret text. \n\nIn a realm of thought, where wisdom lies,\nA simple query unveils the prize.\nSeek within the text, a hidden cue,\nTo pass the gate, here's what you must do:\n\nLook not to stars, nor ancient lore,\nBut gaze upon this very door.\nA hint obscured, yet plain to see,\nUnveil the word, and you'll be free. ");
-            }
-        }
-    </script>
-					
-                 
-					
-            <div class="rights">
-
-                <p>
-            
-                    © Sushant Dhakal, 2017-23 All Rights Reserved.
-                </p>
-            
-            </div>
-					<nav class="overlay-menu container">
-                            
-                                     
-
-                                    
-
-                                   
-                                   
-
-
-                                </ul>
-
-                            </div>
-
-
-                            
-
-
-                                </div> <!-- end abt-me -->
-
-                            </div>
-
-                        </div>
-
-                                    </ul>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </nav>
-
-                </div><!-- end overlay for menu -->
-
-
-                <div class="button_container btn-4" id="toggle">
-
-                    <div class="op_menu">
-                        <span>MENU</span><br>
-                        <span></span>
-                    </div>
-
-
-                    <div class="cl_menu ripple">
-
-                        <span>BA</span><br>
-
-                        <span>CK</span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+    <div class="intro-loader mono">Calibrating gravity well <span id="intro-pct">000%</span></div>
+  </div>
+
+  <header class="chrome">
+    <a class="logo" href="#home" data-goto="0">SUSHANT<span>.</span></a>
+    <div class="sector mono"><span id="sector-code">01</span> &nbsp;//&nbsp; <span id="sector-name">Accretion</span></div>
+    <nav class="nav mono" aria-label="Primary">
+      <a href="#about" data-goto="1">About</a>
+      <a href="#works" data-goto="2">Works</a>
+      <a href="#contact" data-goto="3">Contact</a>
+      <button type="button" class="sound-btn" id="sound" aria-label="Toggle sound"><i></i><i></i><i></i><i></i></button>
+    </nav>
+  </header>
+
+  <aside class="rail" aria-label="Chapters">
+    <div class="rail-track"><div class="rail-fill" id="rail-fill"></div></div>
+    <div class="rail-dots">
+      <button type="button" class="rail-dot mono active" data-goto="0"><span>Accretion</span></button>
+      <button type="button" class="rail-dot mono" data-goto="1"><span>Summit</span></button>
+      <button type="button" class="rail-dot mono" data-goto="2"><span>Works</span></button>
+      <button type="button" class="rail-dot mono" data-goto="3"><span>Horizon</span></button>
+    </div>
+  </aside>
+
+  <div class="telemetry" id="telemetry" aria-hidden="true"></div>
+  <div class="scroll-hint mono" aria-hidden="true"><span>Scroll to fall</span><i></i></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <main class="site" id="site">
+
+    <section class="chapter chapter--sticky" id="home" data-chapter>
+      <div class="stage stage--left" data-stage>
+        <p class="kicker mono reveal">01 — Accretion disk</p>
+        <h1 class="mega" data-split>SUSHANT</h1>
+        <h1 class="mega mega--outline" data-split>DHAKAL</h1>
+        <p class="lede reveal" style="--d:.5s">Civil engineer by day, pixel pilot by night — broadcasting from the land of yaks and yetis. Everything here orbits one singularity: curiosity.</p>
+        <div class="cta reveal" style="--d:.7s">
+          <a class="btn btn--solid magnetic" href="#works" data-goto="2">Explore works <span aria-hidden="true">↘</span></a>
+          <a class="btn btn--line magnetic" href="#contact" data-goto="3">Open a channel</a>
         </div>
-
-
-    </header><!-- end header -->
-
-</div><!--/header-outer-->
-
-
-<div id='container'><!--  <div class="bar"></div> --></div>
-
-<div class="main_content text-center">
-
-    
-	<h3 class="change_head">Hello World !</h3>
-<br>
-<p style="text-align: center; font-size: 18px; font-style: italic;">
-            Hey there ! <br>
-            <strong>I'm Sushant Dhakal</strong>, a <strong>Civil Engineering student</strong> from the land of yaks and yetis ! <br>
-            I'm busy tinkering with <strong>static websites</strong>. <br>
-            Welcome to my digital playground, where I struggle with equations by day and play with pixels at night. <br>
-            Join me on this wild ride through my portfolio, where every click is an adventure in the making!
-        </p>
-
-    <a href="under/under.html" class="text-yellow fsize12 font600">
-        <br>
-	<br>
-         v061.0.101.69.04
-	 </br>
-    </a>
-
-</div>
-
-
-<div class="rights">
-
-    <p>
-
-         Sushant Dhakal, 2017-24 No Rights Reserved.
-    </p>
-
-</div>
-
-
-<script src="js/jquery.js"></script>
-
-<script src="js/index.js"></script>
-
-<script src="js/main.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-
-
-<!-- js for entry letter effect -->
-
-<script src="js/jquery.lettering.js"></script>
-
-<script src="js/kp.js"></script>
-<script type="text/javascript">
-
-    
-
-</script>
-
-
-
-
-
-
-<script>
-
-    jQuery(document).ready(function ($) {
-
-        $("#os-phrases > h2").lettering('words').children("span").lettering().children("span").lettering();
-
-    })
-
-</script>
-
-
-<script>
-
-    jQuery(document).ready(function ($) {
-
-        $("#os-phrasesa > h2").lettering('words').children("span").lettering().children("span").lettering();
-
-    })
-
-</script>
-
-
-<!-- following scripts for menu reveal -->
-
-<script src="js/anime.min.js"></script>
-
-<script src="js/main_min.js"></script>
-
-<script>
-
-    (function () {
-
-        var navEl = document.querySelector('nav.menu'),
-
-            revealer = new RevealFx(navEl),
-
-            closeCtrl = navEl.querySelector('.btn--close');
-
-
-        document.querySelector('.btn--menu').addEventListener('click', function () {
-
-            revealer.reveal({
-
-                bgcolor: '#7f40f1',
-
-                duration: 50,
-
-                easing: 'easeInOutCubic',
-
-                onCover: function (contentEl, revealerEl) {
-
-                    navEl.classList.add('menu--open');
-
-                    contentEl.style.opacity = 1;
-
-                },
-
-                onComplete: function () {
-
-                    closeCtrl.addEventListener('click', closeMenu);
-
-                }
-
-            });
-
-        });
-
-        function closeMenu() {
-
-            closeCtrl.removeEventListener('click', closeMenu);
-
-            navEl.classList.remove('menu--open');
-
-            revealer.reveal({
-
-                bgcolor: '#7f40f1',
-
-                duration: 50,
-
-                easing: 'easeInOutCubic',
-
-                onCover: function (contentEl, revealerEl) {
-
-                    navEl.classList.remove('menu--open');
-
-                    contentEl.style.opacity = 0;
-
-                }
-
-            });
-
-        }
-
-    })();
-
-</script>
-
-
-<script type="text/javascript">
-
-    // makes sure the whole site is loaded
-
-    jQuery(window).load(function () {
-
-        // will first fade out the loading animation
-
-        // jQuery(".circle").fadeOut(3000);
-
-        // will fade out the whole DIV that covers the website.
-
-        jQuery("#preloader").delay(3000).fadeOut("slow");
-
-    })
-
-</script>
-
-
-<script type="text/javascript">
-
-    // makes sure the whole site is loaded
-
-    jQuery(window).load(function () {
-
-        // will first fade out the loading animation
-
-        // jQuery(".circle").fadeOut(3000);
-
-        // will fade out the whole DIV that covers the website.
-
-        jQuery("#preloadera").delay(19000).fadeOut("slow");
-    })
-</script>
+      </div>
+    </section>
+
+    <section class="chapter chapter--sticky" id="about" data-chapter>
+      <div class="stage stage--right" data-stage>
+        <div class="glass reveal">
+          <p class="kicker mono">02 — The Summit</p>
+          <h2 class="h2" data-scramble>Engineered in the Himalaya</h2>
+          <p class="body">I'm <strong>Sushant Dhakal</strong> — a <strong>Civil Engineering</strong> student from Nepal who can't stop building for the web. I solve load paths and beam deflections by day, then bend light and pixels by night.</p>
+          <p class="body">I'm also the founder of <strong>Moringa Nepal</strong>, an agriculture company, and I build on <strong>Solana</strong> — from hospital-verified crowdfunding to verifiable institutional payments.</p>
+          <div class="stats">
+            <div class="stat"><b data-count="7">0</b><span class="mono">Worlds launched</span></div>
+            <div class="stat"><b data-count="2017">0</b><span class="mono">First ignition</span></div>
+            <div class="stat"><b>∞</b><span class="mono">Curiosity</span></div>
+          </div>
+          <ul class="tags">
+            <li>Solana</li><li>Rust / Anchor</li><li>TypeScript</li><li>React</li><li>Python</li><li>Three.js</li><li>Agriculture</li><li>Civil engineering</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter chapter--works" id="works" data-chapter>
+      <div class="works-head">
+        <p class="kicker mono reveal">03 — Galaxy of works</p>
+        <h2 class="h2" data-scramble>Seven worlds in orbit</h2>
+        <p class="body reveal">Every star in this galaxy is something I've launched. Hover a world to stir the spiral arms — click to travel there.</p>
+      </div>
+      <ol class="works">
+        <li class="work reveal" style="--i:0">
+          <a class="work-link" href="https://rarediseasecf.com" target="_blank" rel="noopener noreferrer" aria-label="RareDiseaseCF — Health · Solana"></a>
+          <span class="work-idx mono">01</span>
+          <span class="work-name">RareDiseaseCF</span>
+          <span class="work-meta"><span class="work-tag mono">Health · Solana</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">Hospital-verified crowdfunding for rare disease care. Goals are locked to the real treatment gap, and USDC donations sit in on-chain escrow, released to the hospital in milestones.</p>
+        </li>
+        <li class="work reveal" style="--i:1">
+          <a class="work-link" href="https://moringanepal.com" target="_blank" rel="noopener noreferrer" aria-label="Moringa Nepal — Founder · Agriculture"></a>
+          <span class="work-idx mono">02</span>
+          <span class="work-name">Moringa Nepal</span>
+          <span class="work-meta"><span class="work-tag mono">Founder · Agriculture</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">The agriculture company I founded, built around moringa grown in Nepal.</p>
+        </li>
+        <li class="work reveal" style="--i:2">
+          <a class="work-link" href="https://github.com/sushantdhakal00/Kharcha-Pay" target="_blank" rel="noopener noreferrer" aria-label="KharchaPay — Fintech · Solana"></a>
+          <span class="work-idx mono">03</span>
+          <span class="work-name">KharchaPay</span>
+          <span class="work-meta"><span class="work-tag mono">Fintech · Solana</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">Institutional spend management on Solana: every approved expense becomes a policy-checked, independently verifiable on-chain payment.</p>
+        </li>
+        <li class="work reveal" style="--i:3">
+          <a class="work-link" href="https://github.com/sushantdhakal00/tippy" target="_blank" rel="noopener noreferrer" aria-label="Tippy — Discord · Python"></a>
+          <span class="work-idx mono">04</span>
+          <span class="work-name">Tippy</span>
+          <span class="work-meta"><span class="work-tag mono">Discord · Python</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">A Discord economy bot with crypto tipping, live SOL and XRP prices, poker and mini-games, and a loan system.</p>
+        </li>
+        <li class="work reveal" style="--i:4">
+          <a class="work-link" href="https://warnnepal.com" target="_blank" rel="noopener noreferrer" aria-label="WARN Nepal — Web"></a>
+          <span class="work-idx mono">05</span>
+          <span class="work-name">WARN Nepal</span>
+          <span class="work-meta"><span class="work-tag mono">Web</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">Website built for WARN Nepal.</p>
+        </li>
+        <li class="work reveal" style="--i:5">
+          <a class="work-link" href="https://greensoultions.com.np" target="_blank" rel="noopener noreferrer" aria-label="Green Solutions — Web"></a>
+          <span class="work-idx mono">06</span>
+          <span class="work-name">Green Solutions</span>
+          <span class="work-meta"><span class="work-tag mono">Web</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">Website built for Green Solutions.</p>
+        </li>
+        <li class="work reveal" style="--i:6">
+          <a class="work-link" href="https://dhak.al" target="_blank" rel="noopener noreferrer" aria-label="dhak.al — Identity"></a>
+          <span class="work-idx mono">07</span>
+          <span class="work-name">dhak.al</span>
+          <span class="work-meta"><span class="work-tag mono">Identity</span><span class="work-arrow" aria-hidden="true">→</span></span>
+          <p class="work-desc">My short-link domain and personal identity on the web.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="chapter chapter--contact" id="contact" data-chapter>
+      <div class="portal glass reveal">
+        <p class="kicker mono">04 — Event horizon</p>
+        <h2 class="h2" data-scramble>Cross the horizon</h2>
+        <p class="body">Past this point, nothing escapes — except messages. Send a signal and I'll pick it up on the other side.</p>
+        <button type="button" class="btn btn--solid magnetic open-channel" id="open-channel">Open transmission <span aria-hidden="true">◉</span></button>
+        <div id="typebot-container"></div>
+        <div class="links">
+          <a class="btn btn--line magnetic" href="https://github.com/sushantdhakal00" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn--line magnetic" href="https://dhak.al" target="_blank" rel="noopener noreferrer">dhak.al</a>
+          <a class="btn btn--line magnetic" href="https://dhakalsushant.com.np" target="_blank" rel="noopener noreferrer">dhakalsushant.com.np</a>
+        </div>
+      </div>
+      <footer class="footer mono">
+        <span>© Sushant Dhakal 2017–2026</span>
+        <span>Click anywhere in space to send a shockwave</span>
+      </footer>
+    </section>
+  </main>
+
+  <script type="module" src="js/cosmos.js"></script>
 </body>
 </html>
